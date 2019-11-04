@@ -132,17 +132,14 @@ const mazeSolver = (maze, i=0, j=0) => {
   }
 
   let letter;
-  // if the spot to the right is ' ' or 'e', then go to it 
   if (maze[i][j+1] === ' ' || maze[i][j+1] === 'e') {
     j++;
     letter = 'R';
   }
-  //else go down 
   else if (maze[i+1][j] === ' ' || maze[i+1][j] === 'e') {
     i++;
     letter = 'D';
   }
-  // else go left until you hit an obstacle
   else {
     //go left until you hit an obstacle then go down onemptied
     //this code could be improved to include cases for where you need to go up
@@ -159,13 +156,11 @@ const mazeSolver = (maze, i=0, j=0) => {
   }
   return letter + mazeSolver(maze, i, j)
 }
-
 let mySmallMaze = [
   [' ', ' ', ' '],
   [' ', '*', ' '],
   [' ', ' ', 'e']
 ];
-
 let maze = [
   [' ', ' ', ' ', '*', ' ', ' ', ' '],
   ['*', '*', ' ', '*', ' ', '*', ' '],
@@ -173,5 +168,57 @@ let maze = [
   [' ', '*', ' ', '*', '*', '*', ' '],
   [' ', ' ', ' ', ' ', ' ', ' ', 'e']
 ];
-
 console.log(mazeSolver(maze));
+
+// const anagrams = (str, prefix) => {
+//   arr = Array.from(str);
+
+//   const prefix = arr.slice(arr.length - 1)
+
+//   return word + ', ' + anagrams(str, prefix)
+// } 
+// console.log(anagrams('east'));
+
+// const orgChart = (chart, i=0) => {
+//   // get the length and then spit them out 
+//   // \n
+//   // \t
+
+//   if 
+
+//   let supervisors = Object.keys(chart);
+//   i++;
+
+//   return supervisors[i] + `\n ${orgChart(chart.supervisors[1], i)}`
+// }
+
+// const hierarchy = {
+//   'Zuckerberg': {
+//     'Schroepfer': {
+//       'Bosworth': {Steve, Kyle, Andra},
+//       'Zhao': {Richie, Sofia, Jen}
+//     }, 
+//     'Schrage': {
+//       'VanDyck': {Sabrina, Michelle, Josh}, 
+//       'Swain': {Blanch, Tom, Joe}
+//     },  
+//     'Sandberg': {
+//       'Goler': {Eddie, Julie, Annie},
+//       'Hernandez': {Rowi, Inga, Morgan},
+//       'Moissinac': {Amy, Chuck, Vinni},
+//       'Kelley': {Eric, Ana, Wes}
+//     }
+//   }
+// }
+
+const binaryRep = int => {
+  if (int === 0) {
+    return '';
+  }
+  
+  const quotient = Math.floor(int/2)
+  const binDigit = int % 2;
+  return binDigit + binaryRep(quotient)
+}
+console.log(binaryRep(3)) // => 11
+console.log(binaryRep(25)) // => 1101
