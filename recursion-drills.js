@@ -94,14 +94,13 @@ const stringSplitter = (str, separator) => {
 }
 console.log(stringSplitter('02/20/2020', '/'))
 
-//prints fibonacci seq of param num
+//returns fibonacci seq of param num
 const fibonacci = (fNum, num1=0, num2=0, i=1) => {
   if (fNum + 1 === i) {
     return '';
   }
 
   if (i === 1) {
-    console.log('hi')
     num1 = 0;
     return num1 + fibonacci(fNum, num1, 1, i + 1)
   }
@@ -112,5 +111,17 @@ const fibonacci = (fNum, num1=0, num2=0, i=1) => {
   let num3 = num1 + num2;
   return `, ${num3}` + fibonacci(fNum, num2, num3, i + 1)
 }
-
 console.log(fibonacci(7));
+
+//returns factorial of a given number
+const factorial = (num, i=1) => {
+  //base case
+  if (num + 1 === i) {
+    return 1;
+  }
+
+  //recursion case 
+  return i * factorial(num, ++i)
+}
+console.log(factorial(5))
+
