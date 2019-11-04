@@ -7,7 +7,7 @@ const countingSheep = num => {
     return console.log('All sheep jumped over the fence');
   }
 
-  //recursion case - nothing returned here because we only need to print a countdown for each sheep that jumps over
+  //recursive case - nothing returned here because we only need to print a countdown for each sheep that jumps over
   console.log(`${num}: Another sheep jumps over the fence`);
   const newNum = num-1
   countingSheep(newNum);
@@ -29,7 +29,7 @@ const powerCalculator = (base, exp) => {
     return 1;
   }
 
-  // if exp > 1, subtract one from exp and multiply base by a new recursion
+  // if exp > 1, subtract one from exp and multiply base by a new recursive
   exp = exp - 1;
   
   return base * powerCalculator(base, exp);
@@ -60,7 +60,7 @@ const nthTriNum = (n, i=0) => {
     return 0;
   }
 
-  //recursion call 
+  //recursive call 
   i++;
   return i + nthTriNum(n, i);
 }
@@ -120,8 +120,58 @@ const factorial = (num, i=1) => {
     return 1;
   }
 
-  //recursion case 
+  //recursive case 
   return i * factorial(num, ++i)
 }
 console.log(factorial(5))
 
+const mazeSolver = (maze, i=0, j=0) => {
+  //if we are at the exit, exit loop
+  if (maze[i][j] === 'e') {
+    return '';
+  }
+
+  let letter;
+  // if the spot to the right is ' ' or 'e', then go to it 
+  if (maze[i][j+1] === ' ' || maze[i][j+1] === 'e') {
+    j++;
+    letter = 'R';
+  }
+  //else go down 
+  else if (maze[i+1][j] === ' ' || maze[i+1][j] === 'e') {
+    i++;
+    letter = 'D';
+  }
+  // else go left until you hit an obstacle
+  else {
+    //go left until you hit an obstacle then go down onemptied
+    //this code could be improved to include cases for where you need to go up
+    for (let counter = j; counter > 0; counter--) {
+      if (letter) {
+        letter = letter + 'L';
+      } else {
+        letter = 'L';
+      }
+      j--;
+    }
+    i++;
+    return letter + 'D' + mazeSolver(maze, i, j);
+  }
+  return letter + mazeSolver(maze, i, j)
+}
+
+let mySmallMaze = [
+  [' ', ' ', ' '],
+  [' ', '*', ' '],
+  [' ', ' ', 'e']
+];
+
+let maze = [
+  [' ', ' ', ' ', '*', ' ', ' ', ' '],
+  ['*', '*', ' ', '*', ' ', '*', ' '],
+  [' ', ' ', ' ', '*', ' ', ' ', ' '],
+  [' ', '*', ' ', '*', '*', '*', ' '],
+  [' ', ' ', ' ', ' ', ' ', ' ', 'e']
+];
+
+console.log(mazeSolver(maze));
