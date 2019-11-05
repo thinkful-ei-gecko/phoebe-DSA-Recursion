@@ -1,6 +1,13 @@
 'use strict';
 
-//Counts how many sheep jump over the fence
+/**
+ * ===========================================================================
+ * @function countingSheep
+ * @desc counts number of sheep that jump over fence.
+ * @param {num} num - the number sheep
+ * @returns none
+ * @display displays no of sheep that jumped over fence
+ */
 const countingSheep = num => {
   //base case
   if (!num) {
@@ -14,7 +21,16 @@ const countingSheep = num => {
 }
 countingSheep(5);
 
-//Returns the value of input base (integer) raised to the power of the input exponent (integer)
+
+/**
+ * ===========================================================================
+ * @function powerCalculator
+ * @description calculates the power of base to exp
+ * @param {num} base 
+ * @param {num} exp 
+ * @returns value of input base (integer) raised to the power of the input exponent (integer)
+ * @display none
+ */
 const powerCalculator = (base, exp) => {
   //if items are less than 0 return base/exp should be >=0
   if (base < 0) {
@@ -36,7 +52,14 @@ const powerCalculator = (base, exp) => {
 }
 powerCalculator(2,3)
 
-//returns the reverse of the input 
+/**
+ * ===========================================================================
+ * @function reverseString
+ * @description reverses a string
+ * @param {str} str 
+ * @returns  reverse of the input 
+ * @display none;
+ */
 const reverseString = str => {
   //base call
   if (!str.length) {
@@ -54,6 +77,14 @@ const reverseString = str => {
 }
 console.log(reverseString('heyo'))
 
+/**
+ * ===========================================================================
+ * @function nthTriNum
+ * @description calculates the number of stars for the Nth triangle number (forms eqi triangle) 
+ * @param {num} n 
+ * @param {num} i 
+ * @returns number of stars in nth sequence
+ */
 const nthTriNum = (n, i=0) => {
   //base call
   if (i === n) {
@@ -66,7 +97,14 @@ const nthTriNum = (n, i=0) => {
 }
 console.log(nthTriNum(4))
 
-//make a function that splits based on a specified separator
+/**
+ * ===========================================================================
+ * @function stringSplitter
+ * @description make a function that splits based on a specified separator
+ * @param {str} str 
+ * @param {str} separator 
+ * @returns array of items separated by separator
+ */
 const stringSplitter = (str, separator) => {
   //base call 
   if (!str.length) {
@@ -94,7 +132,15 @@ const stringSplitter = (str, separator) => {
 }
 console.log(stringSplitter('02/20/2020', '/'))
 
-//returns fibonacci seq of param num
+/**
+ * ===========================================================================
+ * @function fibonacci
+ * @description returns fibonacci seq of param num
+ * @param {num} fNum 
+ * @param {num} num1 default 0
+ * @param {num} num2 default 0
+ * @param {num} i default 1
+ */
 const fibonacci = (fNum, num1=0, num2=0, i=1) => {
   if (fNum + 1 === i) {
     return '';
@@ -113,7 +159,13 @@ const fibonacci = (fNum, num1=0, num2=0, i=1) => {
 }
 console.log(fibonacci(7));
 
-//returns factorial of a given number
+/**
+ * ===========================================================================
+ * @function factorial
+ * @param {num} num 
+ * @param {num} i 
+ * @returns factorial of a given number
+ */
 const factorial = (num, i=1) => {
   //base case
   if (num + 1 === i) {
@@ -125,6 +177,14 @@ const factorial = (num, i=1) => {
 }
 console.log(factorial(5))
 
+/**
+ * ===========================================================================
+ * @function mazeSolver
+ * @description solves maze 
+ * @param {arr} maze 
+ * @param {num} i def 0
+ * @param {num} j def 0
+ */
 const mazeSolver = (maze, i=0, j=0) => {
   //if we are at the exit, exit loop
   if (maze[i][j] === 'e') {
@@ -170,19 +230,25 @@ let maze = [
 ];
 console.log(mazeSolver(maze));
 
+/**
+ * ===========================================================================
+ * @function anagram
+ * @description makes anagrams of input 
+ * @param {str} str 
+ * @param {str} prefix def ''
+ */
 //this was completed after reviewing the solution. really hard for me to understand, but is essentially breaking up the word and looping through  
 //note: done without converting to array with substring method. interesting that a loop is okay within the recursive solution
 const anagrams = (str, prefix='') => {
-  console.log(`anagrams(${str}, ${prefix})`)
   //base case 
   if(str.length <= 1){
     console.log(`The anagram is ${prefix}${str}`);
   }
+
   //recursive case 
   else {
     //technically two nested loops here (one with the anagrams), but more complicated per it running the full function again. Base case is just for one string because it pares the string down until you've moved 
     for(let i=0; i<str.length; i++) {
-      console.log('for loop:')
       let currLetter = str.substring(i, i+1);
       //if i is zero the below conveniently prints an empty string
       let prevLetters = str.substring(0, i);
@@ -193,38 +259,83 @@ const anagrams = (str, prefix='') => {
 } 
 console.log(anagrams('east'));
 
-// const orgChart = (chart, i=0) => {
-//   // get the length and then spit them out 
-//   // \n
-//   // \t
 
-//   if 
+/**
+ * ===========================================================================
+ * @function orgChart
+ * @description formats input hierarchy obj as plain text with indents. think bullet points without the bullets 
+ * @param {obj} chart 
+ * @param {num} i def 1
+ */
+//this was completed after reviewing the solution. 
+//note: unsupervised employees have an empty obj for the base case. base case isn't provided because it has a limit per the loop. forEach loop also takes care of the new lines.
+const orgChart = (chart, i=1) => {
+  let indent = ' '.repeat(4 * i); 
 
-//   let supervisors = Object.keys(chart);
-//   i++;
+  Object.keys(chart).forEach(key => {
+    console.log(indent + key);
+    i++;
+    orgChart(chart[key], i);
+  });
+}
+const hierarchy = {
+  'Zuckerberg': {
+    'Schroepfer': {
+      'Bosworth': {
+        'Steve': {},
+				'Kyle': {},
+				'Andra': {}
+      },
+      'Zhao': {
+        'Richie': {},
+				'Sofia': {},
+				'Jen': {}
+      }
+    }, 
+    'Schrage': {
+      'VanDyck': {
+        'Sabrina': {},
+				'Michelle': {},
+				'Josh': {}
+      }, 
+      'Swain': {
+        'Blanch': {},
+				'Tom': {},
+				'Joe': {}
+      }
+    },  
+    'Sandberg': {
+      'Goler': {
+        'Eddie': {},
+				'Julie': {},
+				'Annie': {}
+      },
+      'Hernandez': {
+        'Rowi': {},
+				'Inga': {},
+				'Morgan': {}
+      },
+      'Moissinac': {
+        'Amy': {},
+				'Chuck': {},
+				'Vinni': {}
+      },
+      'Kelley': {
+        'Eric': {},
+				'Ana': {},
+				'Wes': {}
+      }
+    }
+  }
+}
+console.log(orgChart(hierarchy));
 
-//   return supervisors[i] + `\n ${orgChart(chart.supervisors[1], i)}`
-// }
-
-// const hierarchy = {
-//   'Zuckerberg': {
-//     'Schroepfer': {
-//       'Bosworth': {Steve, Kyle, Andra},
-//       'Zhao': {Richie, Sofia, Jen}
-//     }, 
-//     'Schrage': {
-//       'VanDyck': {Sabrina, Michelle, Josh}, 
-//       'Swain': {Blanch, Tom, Joe}
-//     },  
-//     'Sandberg': {
-//       'Goler': {Eddie, Julie, Annie},
-//       'Hernandez': {Rowi, Inga, Morgan},
-//       'Moissinac': {Amy, Chuck, Vinni},
-//       'Kelley': {Eric, Ana, Wes}
-//     }
-//   }
-// }
-
+/**
+ * ===========================================================================
+ * @function binaryRep
+ * @param {num} int 
+ * @returns binary equivalent of input
+ */
 const binaryRep = int => {
   if (int === 0) {
     return '';
