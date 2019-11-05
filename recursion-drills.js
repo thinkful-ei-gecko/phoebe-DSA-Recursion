@@ -170,14 +170,28 @@ let maze = [
 ];
 console.log(mazeSolver(maze));
 
-// const anagrams = (str, prefix) => {
-//   arr = Array.from(str);
-
-//   const prefix = arr.slice(arr.length - 1)
-
-//   return word + ', ' + anagrams(str, prefix)
-// } 
-// console.log(anagrams('east'));
+//this was completed after reviewing the solution. really hard for me to understand, but is essentially breaking up the word and looping through  
+//note: done without converting to array with substring method. interesting that a loop is okay within the recursive solution
+const anagrams = (str, prefix='') => {
+  console.log(`anagrams(${str}, ${prefix})`)
+  //base case 
+  if(str.length <= 1){
+    console.log(`The anagram is ${prefix}${str}`);
+  }
+  //recursive case 
+  else {
+    //technically two nested loops here (one with the anagrams), but more complicated per it running the full function again. Base case is just for one string because it pares the string down until you've moved 
+    for(let i=0; i<str.length; i++) {
+      console.log('for loop:')
+      let currLetter = str.substring(i, i+1);
+      //if i is zero the below conveniently prints an empty string
+      let prevLetters = str.substring(0, i);
+      let afterLetters = str.substring(i+1);
+      anagrams(prevLetters+afterLetters, prefix+currLetter)
+    }
+  }
+} 
+console.log(anagrams('east'));
 
 // const orgChart = (chart, i=0) => {
 //   // get the length and then spit them out 
